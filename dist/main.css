@@ -28,7 +28,7 @@ input:focus {
   border-bottom: 2px solid rgb(96,196,248);
 }
 
-#popup {
+.popup {
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -40,7 +40,7 @@ input:focus {
   align-items: center;
 }
 
-#popup-content {
+.popup-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -50,7 +50,7 @@ input:focus {
   border-radius: 1.2rem;
 }
 
-#popup h1 {
+.popup h1 {
   margin: auto;
   font-size: 3rem;
 }

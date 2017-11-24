@@ -15,17 +15,23 @@
     <link rel="stylesheet" type="text/css" href="main.css"/>
   </head>
   <body>
-    <div id="popup">
-      <div id="popup-content">
+    <div class="popup" id="login">
+      <div class="popup-content">
         <h1>Enter a user name</h1>
         <input id="username" autofocus />
+      </div>
+    </div>
+    <div class="popup" id="add-room" style="">
+      <div class="popup-content">
+        <h1>Enter a room name</h1>
+        <input id="room-name" autofocus />
       </div>
     </div>
     <div id="container">
       <div id="rooms-container">
         <div id="rooms-header">
           <h1>Rooms</h1>
-          <span id="add-room">+</span>
+          <span id="add-room-btn">+</span>
         </div>
         <ul id="rooms"></ul>
       </div>

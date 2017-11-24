@@ -18,6 +18,19 @@ const getRandomColor = () => {
   return `hsl(${h},${s}%,${l}%)`
 }
 
+const makeRoom = (roomname, callback) => {
+
+  console.log("added room"+`${roomname}`)
+
+  $('#rooms').append($(`
+      <li class="room">
+        <span class="roomname">${roomname}</span>
+      </li>
+    `))
+
+  callback()
+}
+
 $(function () {
   let socket = io()
   let nextMessageTime = Date.now()
@@ -56,12 +69,20 @@ $(function () {
           color
         })
 
-        $("#popup").hide()
+        $("#login").hide()
       }
     })
 
-    $('#add-room').click(ev => {
-      console.log('add')
+    $("#add-room").hide()
+
+    $('#add-room-btn').click(ev => {
+      $('#add-room').show().keypress(ev => {
+        if (ev.which == 13) {
+          let roomName = $('#room-name').val()
+
+          if (roomName) makeRoom(roomName, () => $('#add-room').hide())
+        }
+      })
     })
   })
 
