@@ -1,0 +1,64 @@
+html {
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 10pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 200;
+}
+
+input {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+
+  padding: 0.6rem 1rem;
+
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 2rem;
+
+  border: none;
+  border-bottom: 2px solid rgba(104, 104, 104, 0.8);
+
+  transition: border-bottom 0.2s ease-in-out;
+}
+
+input:focus {
+  border-bottom: 2px solid rgb(96,196,248);
+}
+
+#submit{
+
+}
+
+#popup {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: rgba(104, 104, 104, 0.80);
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#popup-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px 20px; /* vertical horizontal */
+  background: #fff;
+
+  border-radius: 1.2rem;
+}
+
+#popup h1 {
+  margin: auto;
+  font-size: 3rem;
+}
+
+#username {
+  margin: 20px;
+}
