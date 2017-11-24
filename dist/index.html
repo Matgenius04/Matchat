@@ -21,10 +21,21 @@
         <input id="username" autofocus />
       </div>
     </div>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+    <div id="container">
+      <div id="rooms-container">
+        <div id="rooms-header">
+          <h1>Rooms</h1>
+          <span id="add-room">+</span>
+        </div>
+        <ul id="rooms"></ul>
+      </div>
+      <div id="channel">
+        <ul id="messages"></ul>
+        <form action="">
+          <input id="m" autocomplete="off" /><button>Send</button>
+        </form>
+      <div>
+    </div>
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
