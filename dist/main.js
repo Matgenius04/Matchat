@@ -1,5 +1,7 @@
 const messageHTML = ({ sender, msg, color }) => {
+
   console.log(`${sender}: ${msg}`)
+
   return $('<li>')
     .append($(
       `<div class="message">
