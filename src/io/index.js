@@ -11,6 +11,7 @@ module.exports = http => {
         name: data.user,
         color: data.color
       }
+      console.log(data.user+' connected');
     })
 
     socket.on('chat message', msg => {
@@ -22,14 +23,14 @@ module.exports = http => {
           color: user.color,
           msg
         })
-        console.log(user.name+' sent a message to '+user.room);
+        console.log(user.name+' sent a message to '+user.room+': '+msg);
       } else {
         io.emit('chat message', {
           sender: user.name,
           color: user.color,
           msg
         })
-        console.log(user.name+' sent a universal message');
+        console.log(user.name+' sent a universal message: '+msg);
       }
     })
 
