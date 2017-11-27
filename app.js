@@ -10,4 +10,4 @@ app.use(express.static('dist'))
 
 app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
 
-http.listen(3300, () => console.log('listening on *:3000'))
+http.listen(3300, () => console.log('listening on *:3300'))

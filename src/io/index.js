@@ -22,12 +22,14 @@ module.exports = http => {
           color: user.color,
           msg
         })
+        console.log(user.name+' sent a message to '+user.room);
       } else {
         io.emit('chat message', {
           sender: user.name,
           color: user.color,
           msg
         })
+        console.log(user.name+' sent a universal message');
       }
     })
 
@@ -36,23 +38,25 @@ module.exports = http => {
         pass: pass || null,
         population: 0 // num users in room
       }
+      console.log('somebody created a new room')
     })
 
     socket.on('join', ({ room, pass }) => {
       if (!rooms[room]) return
 
-      let room = rooms[room]
-      if (room.pass && room.pass != pass) return
+      let roome = rooms[room]
+      if (roome.pass && roome.pass != pass) return
 
       users[socket.id].room = room
-      rooms[room].population++
+      rooms[roome].population++
 
-      io.join(room)
+      io.join(roome)
+      console.log('somebody joined a room')
     })
 
     socket.on('disconnect', () => {
       delete users[socket.id]
-
+      console.log('somebody disconnected')
     })
 
   })
