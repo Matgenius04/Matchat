@@ -78,6 +78,7 @@ $(function () {
 
   socket.on('chat message', message => {
     $('#messages').append(messageHTML(message));
+    console.log('got message')
   });
 
   $(document).ready(() => {

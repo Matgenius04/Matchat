@@ -23,7 +23,7 @@ module.exports = http => {
           color: user.color,
           msg: data.msg
         })
-        console.log(user.name + ' sent a message to ' + user.room + ': ' + data.msg);
+        console.log(user.name + ' sent a message to room ' + user.room + ': ' + data.msg);
       } else {
         io.emit('chat message', {
           sender: user.name,
@@ -55,7 +55,8 @@ module.exports = http => {
       users[data.id].room = data.room
       rooms[data.room].population++
 
-      socket.join(roome)
+      socket.join(users[data.id].room)
+      console.log(users[data.id].room);
       console.log('somebody joined a room')
     })
 
