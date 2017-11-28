@@ -14,6 +14,8 @@ const messageHTML = ({
     `));
 };
 
+let id;
+
 const getRandomColor = () => {
   const rand = (min, max) => min + Math.random() * (max - min);
 
@@ -45,7 +47,11 @@ const makeRoom = (roomname, callback, server) => {
 };
 
 const joinRoom = (name, pass) => {
-  io().emit('join', {room:name, pass:pass})
+  io().emit('join', {
+    room: name,
+    pass: pass,
+    id: id
+  })
 }
 
 $(function () {
@@ -60,7 +66,7 @@ $(function () {
       const message = $('#m').val();
 
       if (message) {
-        socket.emit('chat message', message);
+        socket.emit('chat message', {msg:message, id: id});
         $('#m').val('');
       }
 
@@ -99,12 +105,14 @@ $(function () {
 
           if (roomName) makeRoom(roomName, () => $('#add-room').hide(), false);
 
-          joinRoom($('#room-name').val(), null /*replace with password*/);
+          joinRoom($('#room-name').val(), null /*replace with password*/ );
 
           $('#room-name')[0].value = null;
         }
       });
     });
   });
-
+  socket.on('getId', idd => {
+    id = idd;
+  })
 });

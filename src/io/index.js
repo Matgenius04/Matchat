@@ -11,27 +11,26 @@ module.exports = http => {
         color: data.color
       }
       console.log(data.user + ' connected');
+      socket.emit('getId', socket.id);
     })
 
-    socket.on('chat message', msg => {
-      console.log(socket.id);
-      console.log(users);
-      const user = users[socket.id]
+    socket.on('chat message', data => {
+      const user = users[data.id]
 
       if (user.room) {
         io.to(user.room).emit('chat message', {
           sender: user.name,
           color: user.color,
-          msg
+          msg: data.msg
         })
-        console.log(user.name + ' sent a message to ' + user.room + ': ' + msg);
+        console.log(user.name + ' sent a message to ' + user.room + ': ' + data.msg);
       } else {
         io.emit('chat message', {
           sender: user.name,
           color: user.color,
-          msg
+          msg: data.msg
         })
-        console.log(user.name + ' sent a universal message: ' + msg);
+        console.log(user.name + ' sent a universal message: ' + data.msg);
       }
     })
 
@@ -41,19 +40,19 @@ module.exports = http => {
         pass: data.pass || null,
         population: 0 // num users in room
       }
-      socket.broadcast.emit('new-room', {name:data.room})
+      socket.broadcast.emit('new-room', {
+        name: data.room
+      })
       console.log('somebody created a new room')
     })
 
     socket.on('join', (data) => {
-      console.log(socket.id);
-      console.log(users);
       if (!rooms[data.room]) return
 
       let roome = rooms[data.room]
       if (roome.pass && roome.pass != pass) return
 
-      users[socket.id].room = data.room
+      users[data.id].room = data.room
       rooms[roome].population++
 
         io.join(roome)
