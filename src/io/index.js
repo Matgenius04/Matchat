@@ -14,16 +14,28 @@ module.exports = http => {
       socket.emit('getId', socket.id);
     })
 
+    function getAllRoomMembers(room, _nsp) {
+      var roomMembers = [];
+      var nsp = (typeof _nsp !== 'string') ? '/' : _nsp;
+  
+      for( var member in io.nsps[nsp].adapter.rooms[room] ) {
+          roomMembers.push(member);
+      }
+  
+      return roomMembers;
+  }
+
     socket.on('chat message', data => {
       const user = users[data.id]
 
       if (user.room) {
+        console.log(getAllRoomMembers('a'))
         io.to(user.room).emit('chat message', {
           sender: user.name,
           color: user.color,
           msg: data.msg
         })
-        console.log(user.name + ' sent a message to ' + user.room + ': ' + data.msg);
+        console.log(user.name + ' sent a message to room ' + user.room + ': ' + data.msg);
       } else {
         io.emit('chat message', {
           sender: user.name,
@@ -55,7 +67,8 @@ module.exports = http => {
       users[data.id].room = data.room
       rooms[data.room].population++
 
-      socket.join(roome)
+      socket.join(users[data.id].room)
+      console.log(users[data.id].room);
       console.log('somebody joined a room')
     })
 
