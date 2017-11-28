@@ -28,23 +28,24 @@ const makeRoom = (roomname, callback, server) => {
 
   console.log("added room" + `${roomname}`);
 
-  $('#rooms').append($(`
-      <li class="room">
-        <span class="roomname">${roomname}</span>
-      </li>
-    `));
   if (!server) {
-    socket.emit('make room', {
+    io().emit('make room', {
       room: roomname,
       pass: null
     });
+  } else {
+    $('#rooms').append($(`
+    <li class="room">
+      <span class="roomname">${roomname}</span>
+    </li>
+  `));
   }
 
   callback();
 };
 
 const joinRoom = (name, pass) => {
-  socket.emit('join', {room:name, pass:pass})
+  io().emit('join', {room:name, pass:pass})
 }
 
 $(function () {
