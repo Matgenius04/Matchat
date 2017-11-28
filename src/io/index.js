@@ -1,4 +1,3 @@
-
 module.exports = http => {
   const io = require('socket.io')(http)
   const users = {}
@@ -11,7 +10,7 @@ module.exports = http => {
         name: data.user,
         color: data.color
       }
-      console.log(data.user+' connected');
+      console.log(data.user + ' connected');
     })
 
     socket.on('chat message', msg => {
@@ -23,35 +22,36 @@ module.exports = http => {
           color: user.color,
           msg
         })
-        console.log(user.name+' sent a message to '+user.room+': '+msg);
+        console.log(user.name + ' sent a message to ' + user.room + ': ' + msg);
       } else {
         io.emit('chat message', {
           sender: user.name,
           color: user.color,
           msg
         })
-        console.log(user.name+' sent a universal message: '+msg);
+        console.log(user.name + ' sent a universal message: ' + msg);
       }
     })
 
-    socket.on('make room', ({ room, pass }) => {
-      rooms[room] = {
-        pass: pass || null,
+    socket.on('make room', (data) => {
+      rooms[data.room] = {
+        room: data.room,
+        pass: data.pass || null,
         population: 0 // num users in room
       }
       console.log('somebody created a new room')
     })
 
-    socket.on('join', ({ room, pass }) => {
-      if (!rooms[room]) return
+    socket.on('join', (data) => {
+      if (!rooms[data.room]) return
 
-      let roome = rooms[room]
+      let roome = rooms[data.room]
       if (roome.pass && roome.pass != pass) return
 
-      users[socket.id].room = room
+      users[socket.id].room = data.room
       rooms[roome].population++
 
-      io.join(roome)
+        io.join(roome)
       console.log('somebody joined a room')
     })
 
