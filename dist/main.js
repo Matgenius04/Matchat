@@ -28,7 +28,7 @@ const getRandomColor = () => {
 
 const makeRoom = (roomname, callback, server) => {
 
-  console.log("added room" + `${roomname}`);
+  console.log("added room " + `${roomname}`);
 
   if (!server) {
     io().emit('make room', {
@@ -114,5 +114,9 @@ $(function () {
   });
   socket.on('getId', idd => {
     id = idd;
+  })
+
+  socket.on('new-room', data => {
+    makeRoom(data.name, () => {}, true);
   })
 });

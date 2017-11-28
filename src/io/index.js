@@ -40,7 +40,7 @@ module.exports = http => {
         pass: data.pass || null,
         population: 0 // num users in room
       }
-      socket.broadcast.emit('new-room', {
+      io.emit('new-room', {
         name: data.room
       })
       console.log('somebody created a new room')
