@@ -47,15 +47,15 @@ module.exports = http => {
     })
 
     socket.on('join', (data) => {
-      if (!rooms[data.room]) return
+      if (!rooms[data.room] || rooms[data.room] === undefined) return
 
       let roome = rooms[data.room]
       if (roome.pass && roome.pass != pass) return
 
       users[data.id].room = data.room
-      rooms[roome].population++
+      rooms[data.room].population++
 
-        io.join(roome)
+      socket.join(roome)
       console.log('somebody joined a room')
     })
 
