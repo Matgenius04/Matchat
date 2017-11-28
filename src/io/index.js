@@ -14,6 +14,8 @@ module.exports = http => {
     })
 
     socket.on('chat message', msg => {
+      console.log(socket.id);
+      console.log(users);
       const user = users[socket.id]
 
       if (user.room) {
@@ -39,10 +41,13 @@ module.exports = http => {
         pass: data.pass || null,
         population: 0 // num users in room
       }
+      socket.broadcast.emit('new-room', {name:data.room})
       console.log('somebody created a new room')
     })
 
     socket.on('join', (data) => {
+      console.log(socket.id);
+      console.log(users);
       if (!rooms[data.room]) return
 
       let roome = rooms[data.room]
