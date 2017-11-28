@@ -14,10 +14,22 @@ module.exports = http => {
       socket.emit('getId', socket.id);
     })
 
+    function getAllRoomMembers(room, _nsp) {
+      var roomMembers = [];
+      var nsp = (typeof _nsp !== 'string') ? '/' : _nsp;
+  
+      for( var member in io.nsps[nsp].adapter.rooms[room] ) {
+          roomMembers.push(member);
+      }
+  
+      return roomMembers;
+  }
+
     socket.on('chat message', data => {
       const user = users[data.id]
 
       if (user.room) {
+        console.log(getAllRoomMembers('a'))
         io.to(user.room).emit('chat message', {
           sender: user.name,
           color: user.color,
