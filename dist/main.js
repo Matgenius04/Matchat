@@ -83,6 +83,8 @@ $(function () {
           let roomName = $('#room-name').val()
 
           if (roomName) makeRoom(roomName, () => $('#add-room').hide())
+          
+          $('#room-name')[0].value = null;
         }
       })
     })
