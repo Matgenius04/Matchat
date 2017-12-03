@@ -1,4 +1,6 @@
+//https://www.webdesignerdepot.com/2013/03/how-to-create-a-color-picker-with-html5-canvas/
 let canvas = document.getElementById('canvas_picker').getContext('2d');
+
 
 	// create an image object and get it’s source
 	let img = new Image();
