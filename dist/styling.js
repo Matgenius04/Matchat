@@ -1,7 +1,7 @@
-var canvas = document.getElementById('canvas_picker').getContext('2d');
+let canvas = document.getElementById('canvas_picker').getContext('2d');
 
 	// create an image object and get it’s source
-	var img = new Image();
+	let img = new Image();
 	img.src = 'image.jpg';
 
 	// copy the image to the canvas
