@@ -62,6 +62,7 @@ input:focus {
 #container {
   display: flex;
   flex-direction: row;
+  position: fixed;
 }
 
 #rooms-container {
